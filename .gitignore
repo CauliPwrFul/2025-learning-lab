@@ -3,6 +3,8 @@ __pycache__/
 *.pyc
 .venv/
 .env
+*tempCodeRunnerFile.py
+*.idea/
 
 # Node / React
 node_modules/
