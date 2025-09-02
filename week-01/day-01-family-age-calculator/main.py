@@ -16,7 +16,7 @@ ancestors = {
     "Carmen Briscoe": 1968,
     "Junior Griffiths": 1957,
     "Ivorine Clarke": 1940,
-    "Leslie Griffiths": "unknown",
+    "Leslie Griffiths": 0,
     "Steadlyn Briscoe": 1941,
     "Novia Joyce McLean": 1945,
     "Martha Hall": 1900,
@@ -32,22 +32,29 @@ ancestors = {
 # print(len(ancestors))
 # print(ancestors)
 
+def age_in_years(birth_year: int, year: int = current_year) -> int:
+    return year - birth_year
+
 def oldest_ancestor(data: dict[str, int]) -> tuple[str, int]:
     return min (data.items(), key=lambda kv: kv[1])
 
-def sort_by_birth_year(data: dict[str, int]):
-    return sorted(data.items(), key=lambda kv: kv[1])
-
-def age_in_years(birth_year: int = ancestors.values(), year: int = current_year) -> int:
-    return year - birth_year
+def sort_by_birth_year(data: dict[str, int ]):
+    return sorted(data.items(), key=lambda kv: (kv[1] if isinstance(kv[1], int) else float('inf')))
 
 if __name__ == "__main__":
+    print("Oldest Ancestor Calculator")
     print(f"Youngest Relative: {family[0]}  Oldest Relative: {family[-1]}")
+    print()
+
+    print("Age in Years Sorter")
     ages = {n: age_in_years(y) for n, y in ancestors.items()}
     for n, a in ages.items():
         print(f"{n}: {a}")
     name, by = oldest_ancestor(ancestors)
     print(f"Oldest: {name} (b. {by})")
     print("Oldest → Youngest:")
+    print()
+
+    print("Oldest Ancestor Sorter")
     for n, y in sort_by_birth_year(ancestors):
         print(f"{n} — {y}")
